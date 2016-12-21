@@ -1,10 +1,10 @@
 {
-  "name": "My App",
-  "description": "Description of your app",
+  "name": "aPyx",
+  "description": "1ère application Phone Gap",
   "launch_path": "/index.html",
   "icons": {
     "128": "/img/logo.png"
   },
-  "default_locale": "en",
+  "default_locale": "fr",
   "type": "privileged"
 }
