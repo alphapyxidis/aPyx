@@ -25,23 +25,24 @@ $$(document).on('deviceready', function() {
 // Option 1. Using page callback for page (for "about" page in this case) (recommended way):
 myApp.onPageInit('about', function (page) {
     // Do something here for "about" page
-    myApp.alert('0. Here comes About page');
+    cordova.plugins.barcodeScanner.scan(
+      function (result) {
+          alert("We got a barcode\n" +
+                "Result: " + result.text + "\n" +
+                "Format: " + result.format + "\n" +
+                "Cancelled: " + result.cancelled);
+      }, 
+      function (error) {
+          alert("Scanning failed: " + error);
+      },
+      {
+          "preferFrontCamera" : true, // iOS and Android
+          "showFlipCameraButton" : true, // iOS and Android
+          "prompt" : "Place a barcode inside the scan area", // supported on Android only
+          "formats" : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+          "orientation" : "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
+      }
+   );
 })
 
-// Option 2. Using one 'pageInit' event handler for all pages:
-$$(document).on('pageInit', function (e) {
-    // Get page data from event data
-    var page = e.detail.page;
-
-    if (page.name === 'about') {
-        // Following code will be executed for page with data-page attribute equal to "about"
-        myApp.alert('1. Here comes About page');
-    }
-})
-
-// Option 2. Using live 'pageInit' event handlers for each page
-$$(document).on('pageInit', '.page[data-page="about"]', function (e) {
-    // Following code will be executed for page with data-page attribute equal to "about"
-    myApp.alert('2. Here comes About page');
-})
 
