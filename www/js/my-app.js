@@ -14,12 +14,16 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+
+function onBatteryStatus(status) {
+    alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
+}    
+
+window.addEventListener("batterystatus", onBatteryStatus, false);
+
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Prêt !");
-    
-    window.addEventListener("batterystatus", onBatteryStatus, false);
-
 });
 
 
@@ -72,7 +76,3 @@ myApp.onPageInit('about', function (page) {
     
    
 })
-
-function onBatteryStatus(status) {
-    alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
-}    
