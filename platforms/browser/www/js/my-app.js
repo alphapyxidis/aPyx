@@ -17,6 +17,9 @@ var mainView = myApp.addView('.view-main', {
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Prêt !");
+    
+    window.addEventListener("batterystatus", onBatteryStatus, false);
+
 });
 
 
@@ -33,16 +36,43 @@ myApp.onPageInit('about', function (page) {
                 "Cancelled: " + result.cancelled);
       }, 
       function (error) {
-          alert("Scanning failed: " + error);
+          alert("Echec : " + error);
       },
       {
-          "preferFrontCamera" : true, // iOS and Android
+          "preferFrontCamera" : false, // iOS and Android
           "showFlipCameraButton" : true, // iOS and Android
-          "prompt" : "Place a barcode inside the scan area", // supported on Android only
-          "formats" : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
-          "orientation" : "landscape" // Android only (portrait|landscape), default unset so it rotates with the device
+          "prompt" : "Positionner le QR Code dans la zone de détection...", // supported on Android only
+          "orientation" : "portrait" // Android only (portrait|landscape), default unset so it rotates with the device
       }
    );
+   
+    // onSuccess Callback
+    // This method accepts a Position object, which contains the
+    // current GPS coordinates
+    //
+    var onSuccess = function(position) {
+        alert('Latitude: '          + position.coords.latitude          + '\n' +
+              'Longitude: '         + position.coords.longitude         + '\n' +
+              'Altitude: '          + position.coords.altitude          + '\n' +
+              'Accuracy: '          + position.coords.accuracy          + '\n' +
+              'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
+              'Heading: '           + position.coords.heading           + '\n' +
+              'Speed: '             + position.coords.speed             + '\n' +
+              'Timestamp: '         + position.timestamp                + '\n');
+    };
+
+    // onError Callback receives a PositionError object
+    //
+    function onError(error) {
+        alert('code: '    + error.code    + '\n' +
+              'message: ' + error.message + '\n');
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    
+   
 })
 
-
+function onBatteryStatus(status) {
+    alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
+}    
