@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.alphapyxidis.apyx" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.alphapyxidis.apyx" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>aPyx</name>
     <description>
         Ma 1ère application Phonegap
@@ -32,6 +32,9 @@
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
     <plugin name="phonegap-plugin-barcodescanner" />
     <plugin name="cordova-plugin-geolocation" />
-    <plugin name="cordova-plugin-battery-status"  />
+    <plugin name="cordova-plugin-camera"  />
+    <plugin name="cordova-plugin-device"  />
+    <plugin name="cordova-plugin-device-motion"  />
+    <plugin name="cordova-plugin-device-orientation"  />
     
 </widget>

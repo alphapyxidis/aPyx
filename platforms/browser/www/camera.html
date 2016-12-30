@@ -1,0 +1,52 @@
+<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->
+
+<script>
+function takePicture()
+{
+    document.getElementById('CameraButton').removeClass.addClass('gap-button center round large red flash animated');
+    
+    navigator.camera.getPicture (
+        function (imageData) {
+                var image = document.getElementById('myImage') ;
+                image.src = "données : image / jpeg ; base64," + imageData;
+        }, 
+        function (message) 
+        {
+                alert (' a échoué car: '+ message);
+        },
+        {
+            quality: 75,
+            PictureSourceType:Camera.PictureSourceType.CAMERA,
+            destinationType: Camera.DestinationType.FILE_URI
+        }
+    );
+}                    
+
+</script>
+
+<!-- Top Navbar-->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link"><i class="charcoal icon-chevron-left"></i></a>
+        </div>
+        <div class="center sliding"></div>
+        <div class="right">
+            <a href="#" class="link icon-only open-panel"><i class="white icon-gears"></i></a>
+        </div>
+    </div>
+</div>
+<div class="pages">
+    <div data-page="camera" class="page">
+        <div class="content-block">
+            <div class="one whole double-gapped">
+                <button id="CameraButton" class="center round large green" onclick=takePicture() ><i class="icon-camera"></i></button>
+            </div>
+            <div class="row bordered" style="height:300px" >
+                <div class="absolute middle center three fourths">
+                    <img id="myImage" src="img/alpha-small.png"></img>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

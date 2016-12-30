@@ -21,17 +21,49 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     <!-- Your app title -->
-    <title>My App</title>
+    <title>aPyx</title>
 
     <!-- This template defaults to the iOS CSS theme. To support both iOS and material design themes, see the Framework7 Tutorial at the link below:
         http://www.idangero.us/framework7/tutorials/maintain-both-ios-and-material-themes-in-single-app.html
      -->
 
+    <script type="text/javascript" src="js/libs/modernizr-2.6.2.min.js"></script>
+    <script type="text/javascript" src="js/libs/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/raphael.js"></script>
+	<script type="text/javascript" src="js/boussole.js"></script>
+    
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.min.css">
     <link rel="stylesheet" href="lib/framework7/css/framework7.ios.colors.min.css">
-    <link rel="stylesheet" href="lib/framework7/css/framework7.feeds.css">
-
+    <link rel="stylesheet" href="css/groundwork.css">
     <link rel="stylesheet" href="css/styles.css">
+	<style>
+        .paper {
+            height: 96%;
+            width: 96%;
+            position:relative;
+            top: 2%;
+            left: 2%%;
+        }
+		#apyx-headerwrap {
+			background: #333333
+			color: #CCCCCC;
+			line-height: normal;
+			height:44px;
+		}
+		#apyx-header {
+			position: relative;
+			height:44px;
+		}
+		#apyx-headermask {
+			width: 500px;
+			display: block;
+			background: url(img/header-mask.png) no-repeat top left;
+			height: 44px;
+			position: absolute;
+			top: 0;
+			left: 0px;
+		}
+	</style>
 </head>
 
 <body>
@@ -43,7 +75,7 @@
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal">
         <div class="content-block">
-            <p>Left panel content goes here</p>
+
         </div>
     </div>
 
@@ -52,16 +84,21 @@
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Top Navbar-->
-            <div class="navbar">
+            <div class="navbar" style="background: #333333;">
+                 <div id="apyx-headerwrap">
+                        <div id="apyx-header" style="background: url(img/logo.png) no-repeat top left;">
+                        <div id="apyx-headermask"></div>
+                    </div>
+                 </div>
                 <div class="navbar-inner">
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
-                    <div class="center sliding">Awesome App</div>
+                    <div class="center sliding"></div>
                     <div class="right">
                         <!--
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                        <a href="#" class="link icon-only open-panel"><i class="white icon-gears"></i></a>
                     </div>
                 </div>
             </div>
@@ -72,29 +109,46 @@
                     <!-- Scrollable page content -->
                     <div class="page-content">
                         <div class="content-block">
-                            <p>Page content goes here</p>
-                            <!-- Link to another page -->
-
-             <div class="content-block-title">Menu</div>
-              <div class="list-block">
-                <ul>
-                  <li>
-                    <a href="alphapyxidis.html" class="item-content item-link">
-                      <div class="item-inner">
-                        <div class="item-title">Actualités du blog</div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="about.html" class="item-content item-link">
-                      <div class="item-inner">
-                        <div class="item-title">A Propos...</div>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
+                            <div class="content-block-title">Menu</div>
+                            <div class="list-block">
+                                <ul>
+                                  <li>
+                                    <a href="gps.html" class="item-content item-link">
+                                      <div class="item-inner">
+                                        <div class="item-title">Me localiser</div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="qrcode.html" class="item-content item-link">
+                                      <div class="item-inner">
+                                        <div class="item-title">Lire QR Code</div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="camera.html" class="item-content item-link">
+                                      <div class="item-inner">
+                                        <div class="item-title">Prendre une photo</div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="compass.html" class="item-content item-link">
+                                      <div class="item-inner">
+                                        <div class="item-title">Boussole</div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a href="about.html" class="item-content item-link">
+                                      <div class="item-inner">
+                                        <div class="item-title">A Propos...</div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,8 +157,8 @@
             <div class="toolbar">
                 <div class="toolbar-inner">
                     <!-- Toolbar links -->
-                    <a href="#" class="link">Link 1</a>
-                    <a href="#" class="link">Link 2</a>
+                    <a href="about.html" class="link">?</a>
+                    <div class="align-right">Batterie : <span id="batterylevel"></span> %</div>
                 </div>
             </div>
         </div>
@@ -112,8 +166,9 @@
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/framework7/js/framework7.min.js"></script>
-    <script type="text/javascript" src="lib/framework7/js/framework7.feeds.js"></script>
+    <script type="text/javascript" src="js/groundwork.all.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
+    
 </body>
 
 </html>

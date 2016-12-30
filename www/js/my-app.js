@@ -1,12 +1,11 @@
 // Initialize app
-var myApp = new Framework7({
-    externalLinks: 'a.external, .feeds-page .content-block a',
-    animateNavBackIcon: true
-});
+var myApp = new Framework7()
 
 
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
+
+var watchID = -1;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
@@ -14,24 +13,44 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
-
 function onBatteryStatus(status) {
-    alert("Level: " + status.level + " isPlugged: " + status.isPlugged);
+    if (status.isPlugged)
+    {
+        document.getElementById('batterylevel').innerHTML = '(en charge) ' + Math.round(status.level);
+    }
+    else
+    {
+        document.getElementById('batterylevel').innerHTML = Math.round(status.level);
+    }
 }    
-
-window.addEventListener("batterystatus", onBatteryStatus, false);
 
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Prêt !");
+    
+    window.addEventListener("batterystatus", onBatteryStatus, false);
 });
 
 
 // Now we need to run the code that will be executed only for About page.
 
-// Option 1. Using page callback for page (for "about" page in this case) (recommended way):
+// Option 1. Using page callback for page (for "about" page in this case) (recommended way)
+
 myApp.onPageInit('about', function (page) {
-    // Do something here for "about" page
+    
+console.log('Cordova : ' + device.cordova);
+console.log('Model : ' + device.model);
+console.log('Platform : ' + device.platform);
+console.log('Uuid : ' + device.uuid);
+console.log('Version : ' + device.version);
+console.log('Manufacturer : ' + device.manufacturer);
+console.log('IsVirtual : ' + device.isVirtual);
+console.log('Serial : ' + device.serial);
+
+})
+
+
+myApp.onPageInit('qrcode', function (page) {
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           alert("We got a barcode\n" +
@@ -45,11 +64,12 @@ myApp.onPageInit('about', function (page) {
       {
           "preferFrontCamera" : false, // iOS and Android
           "showFlipCameraButton" : true, // iOS and Android
-          "prompt" : "Positionner le QR Code dans la zone de détection...", // supported on Android only
-          "orientation" : "portrait" // Android only (portrait|landscape), default unset so it rotates with the device
+          "prompt" : "Scannez le QR Code..." // supported on Android only
       }
    );
-   
+})
+
+myApp.onPageInit('gps', function (page) {
     // onSuccess Callback
     // This method accepts a Position object, which contains the
     // current GPS coordinates
@@ -73,6 +93,50 @@ myApp.onPageInit('about', function (page) {
     }
 
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
-    
-   
 })
+
+
+myApp.onPageBack('compass', function (page) {
+
+    // ... later on ...
+    if (watchID != -1) {
+        navigator.compass.clearWatch(watchID);
+        watchID = -1;
+    }
+})
+
+myApp.onPageInit('compass', function (page) {
+    
+    var angle;
+    
+    drawCompass('boussole');
+    
+    function onInit(heading) {
+        drawFov(0,2,false);
+        gHeading = heading.magneticHeading;
+        rotateCompass(gHeading);
+
+        var options = {
+            frequency: 500
+        }; // Update every 3 seconds
+
+        watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+    };
+
+    function onSuccess(heading) {
+        
+        angle = heading.magneticHeading - gHeading;
+        gHeading = heading.magneticHeading;
+        rotateCompass(angle);
+    };
+
+    function onError(error) {
+        alert('CompassError: ' + error.code);
+    };
+
+    navigator.compass.getCurrentHeading(onInit, onError);
+
+})
+
+
+
