@@ -112,7 +112,8 @@ myApp.onPageInit('compass', function (page) {
     drawCompass('boussole');
     
     function onInit(heading) {
-        drawFov(0,2,false);
+        // drawFov(0,2,false);
+        drawNeedle(0);
         gHeading = heading.magneticHeading;
         rotateCompass(gHeading);
 

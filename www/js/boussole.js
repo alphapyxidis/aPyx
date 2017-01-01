@@ -1,6 +1,6 @@
  // variables globales
 var paper1, 
-	infoBulle, gMap, gField, gCompass, photo, marker1, marker2, 
+	infoBulle, gMap, gField, gCompass, gNeedle, photo, marker1, marker2, 
 	cursor1, cursor2, cursor3, 
 	sun, moon, 
 	gWidth, gHeight,
@@ -346,6 +346,104 @@ function drawFov(h, f, editable) {
 
 };
 
+function drawNeedle(heading)
+{
+		var 	ra, rb, rc, rd, x0, y0, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7,
+			midAngle, startAngle, endAngle, dataString, tmpObj;
+				
+		gNeedle.remove();
+		gNeedle.clear();
+
+        rb = 8;
+        ra = 12;
+        rc = r0-(2*rb);
+        rd = r0-rb;
+
+		midAngle = heading-90;
+        startAngle = -30 + midAngle;
+        endAngle = 30 + midAngle;
+	
+		x0=cx+Math.round(ra*Math.cos(Math.radians(startAngle)),0);
+		y0=cy+Math.round(ra*Math.sin(Math.radians(startAngle)),0);
+        
+		x1=cx+Math.round(rc*Math.cos(Math.radians(midAngle)),0);
+		y1=cy+Math.round(rc*Math.sin(Math.radians(midAngle)),0);
+
+		x2=cx+Math.round(rd*Math.cos(Math.radians(midAngle)),0);
+		y2=cy+Math.round(rd*Math.sin(Math.radians(midAngle)),0);
+
+		x3=cx+Math.round(ra*Math.cos(Math.radians(endAngle)),0);
+		y3=cy+Math.round(ra*Math.sin(Math.radians(endAngle)),0);
+
+		x4=cx+Math.round(ra*Math.cos(Math.radians(endAngle+180)),0);
+		y4=cy+Math.round(ra*Math.sin(Math.radians(endAngle+180)),0);
+
+		x5=cx+Math.round(ra*Math.cos(Math.radians(startAngle+180)),0);
+		y5=cy+Math.round(ra*Math.sin(Math.radians(startAngle+180)),0);
+
+		x6=cx+Math.round(rc*Math.cos(Math.radians(endAngle+180)),0);
+		y6=cy+Math.round(rc*Math.sin(Math.radians(endAngle+180)),0);
+
+		x7=cx+Math.round(rd*Math.cos(Math.radians(midAngle+180)),0);
+		y7=cy+Math.round(rd*Math.sin(Math.radians(midAngle+180)),0);
+        
+        var tmpObj, dataString;
+
+/*
+  		dataString  = "M" + (cx-ra) + "," + cy + " A" + ra + ","+ ra + " 0 0,1 " + x0 + " "+ y0 + " L" + x0 + " " + y1 + " L" + x2 + " " + y2 + " L" + x3 + " " + y1 + " L" + x3 + " " + y3 + " A" + ra + ","+ ra + " 0 0,1 " + (cx+ra) + " " + cy +  " L" + (cx+rb) + " " + cy + " A" + rb + ","+ rb + " 0 0,0 " + (cx-rb) + " " + cy + " L" + (cx-ra) + " " + cy + " z" ;  
+		tmpObj = paper1.path(dataString);
+
+		tmpObj.attr({
+			fill: "red",
+			stroke: "red",
+            "stroke-width": 1, 
+			opacity: .33
+		});
+
+		gNeedle.push(tmpObj);
+
+ 		dataString = "M" + (cx-ra) + "," + cy + " A" + ra + ","+ ra + " 0 0,0 " + x4 + " "+ y4 + " L" + x4 + " " + y7 + " L" + x7 + " " + (y7-8) + " L" + x5 + " " + y7 + " L" + x5 + " " + y5 + " A" + ra + ","+ ra + " 0 0,0 " + (cx+ra) + " " + cy +  " L" + (cx+rb) + " " + cy + " A" + rb + ","+ rb + " 0 0,1 " + (cx-rb) + " " + cy + " L" + (cx-ra) + " " + cy + " z" ;  
+		tmpObj = paper1.path(dataString);
+
+		tmpObj.attr({
+			fill: "black",
+			stroke: "black",
+            "stroke-width": 1,
+            opacity: .1
+		});
+
+		gNeedle.push(tmpObj);
+ */
+ 		dataString = "M" + x0 + "," + y0 + " A" + ra + ","+ ra + " 0 0,0 " + x4 + " "+ y4 + " L" + x4 + " " + y7 + " L" + x7 + " " + (y7-8) + " L" + x5 + " " + y7 + " L" + x5 + " " + y5 + " A" + ra + ","+ ra + " 0 0,0 " + x3 + " " + y3 + " L" + x3 + " " + y1 + " L" + x2 + " " + y2 + " L" + x0 + " " + y1 + " z" ;  
+
+		tmpObj = paper1.path(dataString);
+
+		tmpObj.attr({
+			fill: "dodgerblue",
+			stroke: "dodgerblue",
+            "stroke-width": 2,
+            opacity: .33
+		});
+
+		gNeedle.push(tmpObj);
+
+		tmpObj = paper1.circle(cx,cy,6).attr({"fill":"dodgerblue", "stroke-width": 2, "stroke": "white"}).toFront();
+		gNeedle.push(tmpObj);
+
+		if (typeof sun !== "undefined") {
+			sun.toFront();
+		};
+		if (typeof moon !== "undefined") {
+			moon.toFront();
+		};
+
+
+        // dataString = "M " + x2 + " " + y2 + " m 0 -8 l 6 12 l -12 0 l 6 -12 ";
+        // cursor2 = paper1.path(dataString);
+        // cursor2.transform("R" + gHeading);
+        // cursor2.attr({"fill":"dodgerblue", "stroke-width": 2, "stroke": "white"}); 
+
+};
 
 function rotateFov(angle) {
 		var dataString = "...R"+Math.round(angle)+","+cx+","+cy;
@@ -356,8 +454,13 @@ function rotateFov(angle) {
 		cursor2.transform(dataString);
 };
 
-function rotateCompass(angle) {
+function rotateNeedle(angle) {
 		var dataString = "...R"+Math.round(angle)+","+cx+","+cy;
+		gCompass.transform(dataString);			
+};
+
+function rotateCompass(angle) {
+		var dataString = "...R"+Math.round(-1*angle)+","+cx+","+cy;
 		gCompass.transform(dataString);			
 };
 
@@ -551,6 +654,7 @@ function drawCompass(idCanvas) {
 
 		paper1 = Raphael(idCanvas, gWidth, gHeight);
 		gField = paper1.set();
+        gNeedle = paper1.set();
 		gCompass = paper1.set();
 		
         tmpObj = paper1.path(dataString).attr({fill:"white", opacity: .85, stroke: "none", "cursor": "crosshair"}).dblclick(dblClickEvent);
@@ -642,8 +746,6 @@ function drawCompass(idCanvas) {
 		tmpObj = paper1.circle(x,y,Math.round(5*ratio)).attr({fill:"lightgrey", opacity: .85, stroke: "none"});
 		gCompass.push(tmpObj);
 		
-		tmpObj = paper1.circle(cx,cy,6).attr({"fill":"dodgerblue", "stroke-width": 2, "stroke": "white"}).toFront();
-		gCompass.push(tmpObj);
 };
 
 function refreshMap() {
