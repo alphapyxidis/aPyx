@@ -456,7 +456,7 @@ function rotateFov(angle) {
 
 function rotateNeedle(angle) {
 		var dataString = "...R"+Math.round(angle)+","+cx+","+cy;
-		gCompass.transform(dataString);			
+		gNeedle.transform(dataString);			
 };
 
 function rotateCompass(angle) {

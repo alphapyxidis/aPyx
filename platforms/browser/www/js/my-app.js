@@ -13,6 +13,12 @@ var mainView = myApp.addView('.view-main', {
     dynamicNavbar: true
 });
 
+function takePicture()
+{
+    document.getElementById('CameraButton').removeClass.addClass('gap-button center round large red flash animated');
+    
+}                    
+
 function onBatteryStatus(status) {
     if (status.isPlugged)
     {
@@ -105,6 +111,24 @@ myApp.onPageBack('compass', function (page) {
     }
 })
 
+myApp.onPageInit('camera', function (page) {
+    navigator.camera.getPicture (
+        function (imageData) {
+                var image = document.getElementById('myImage') ;
+                image.src = "données : image / jpeg ; base64," + imageData;
+        }, 
+        function (message) 
+        {
+                alert (' a échoué car: '+ message);
+        },
+        {
+            quality: 75,
+            PictureSourceType:Camera.PictureSourceType.CAMERA,
+            destinationType: Camera.DestinationType.FILE_URI
+        }
+    );
+})
+
 myApp.onPageInit('compass', function (page) {
     
     var angle;
@@ -115,7 +139,7 @@ myApp.onPageInit('compass', function (page) {
         // drawFov(0,2,false);
         drawNeedle(0);
         gHeading = heading.magneticHeading;
-        rotateCompass(gHeading);
+        rotateNeedle(gHeading);
 
         var options = {
             frequency: 500
@@ -128,7 +152,7 @@ myApp.onPageInit('compass', function (page) {
         
         angle = heading.magneticHeading - gHeading;
         gHeading = heading.magneticHeading;
-        rotateCompass(angle);
+        rotateNeedle(angle);
     };
 
     function onError(error) {
