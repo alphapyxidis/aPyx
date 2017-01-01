@@ -18,6 +18,10 @@
     <platform name="android">
         <preference name="android-minSdkVersion" value="14" />
         <allow-intent href="market:*" />
+        <icon src="icon-36-ldpi.png" qualifier="ldpi" width="36" height="36" />
+        <icon src="icon-48-mdpi.png" qualifier="mdpi" width="48" height="48"/>
+        <icon src="icon-72-hdpi.png" qualifier="hdpi" width="72" height="72"/>
+        <icon src="icon-96-xhdpi.png" qualifier="xhdpi" width="96" height="96"/>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

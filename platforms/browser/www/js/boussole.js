@@ -455,7 +455,7 @@ function rotateFov(angle) {
 };
 
 function rotateNeedle(angle) {
-		var dataString = "...R"+Math.round(angle)+","+cx+","+cy;
+		var dataString = "...R"+Math.round(-1*angle)+","+cx+","+cy;
 		gNeedle.transform(dataString);			
 };
 
