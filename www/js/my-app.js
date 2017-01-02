@@ -56,7 +56,8 @@ console.log('Serial : ' + device.serial);
 })
 
 
-myApp.onPageInit('qrcode', function (page) {
+/*
+ myApp.onPageInit('qrcode', function (page) {
     cordova.plugins.barcodeScanner.scan(
       function (result) {
           alert("We got a barcode\n" +
@@ -73,7 +74,8 @@ myApp.onPageInit('qrcode', function (page) {
           "prompt" : "Scannez le QR Code..." // supported on Android only
       }
    );
-})
+}) 
+*/
 
 myApp.onPageInit('gps', function (page) {
     // onSuccess Callback

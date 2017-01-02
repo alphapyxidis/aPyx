@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.alphapyxidis.apyx" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.alphapyxidis.apyx" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <feature name="BarcodeScanner">
         <param name="browser-package" value="BarcodeScanner" />
     </feature>
@@ -11,12 +11,13 @@
     </feature>
     <name>aPyx</name>
     <description>
-        Ma 1ère application Phonegap
+        Boîte à outils pour la randonnée : boussole, GPS, photos géolocalisée... 
     </description>
     <author email="vincent.vermorel@gmail.com" href="http://alpha-pyxidis.com">
         alphapyxidis
     </author>
     <content src="index.html" />
+    <access origin="http://alpha-pyxidis.com" subdomains="true" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -25,5 +26,4 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="android-build-tool" value="gradle" />
 </widget>
