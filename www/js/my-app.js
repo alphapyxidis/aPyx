@@ -56,7 +56,6 @@ console.log('Serial : ' + device.serial);
 })
 
 
-/*
  myApp.onPageInit('qrcode', function (page) {
     cordova.plugins.barcodeScanner.scan(
       function (result) {
@@ -75,7 +74,6 @@ console.log('Serial : ' + device.serial);
       }
    );
 }) 
-*/
 
 myApp.onPageInit('gps', function (page) {
     // onSuccess Callback
