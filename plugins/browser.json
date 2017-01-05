@@ -39,6 +39,21 @@
         },
         "cordova-plugin-vibration": {
             "PACKAGE_NAME": "com.alphapyxidis.apyx"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.alphapyxidis.apyx"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.alphapyxidis.apyx"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.alphapyxidis.apyx"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.alphapyxidis.apyx"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.alphapyxidis.apyx"
         }
     },
     "dependent_plugins": {
