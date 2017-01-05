@@ -88,7 +88,9 @@ myApp.onPageInit('gps', function (page) {
         
         var d = new Date(position.timestamp);
 
-        document.getElementById('tracegps').innerHTML = document.getElementById('tracegps').innerHTML + '<br>' + d.toISOString() + '&nbsp;&nbsp;&nbsp;&nbsp;' + position.coords.latitude + '&nbsp;&nbsp;&nbsp;&nbsp;' + position.coords.longitude ;
+        $('#startgps').removeClass().addClass('center round large error animated flash');
+
+ //       document.getElementById('tracegps').innerHTML = document.getElementById('tracegps').innerHTML + '<br>' + d.toISOString() + '&nbsp;&nbsp;&nbsp;&nbsp;' + position.coords.latitude + '&nbsp;&nbsp;&nbsp;&nbsp;' + position.coords.longitude ;
     };
 
     // onError Callback receives a PositionError object
