@@ -47,6 +47,7 @@
     <plugin name="cordova-plugin-console" spec="~1.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="~1.0.1" />
     <plugin name="phonegap-plugin-barcodescanner" />
+    <plugin name="cordova-plugin-battery-status" spec="~1.2.2"/>
     <plugin name="cordova-plugin-geolocation" spec="~2.4.1"/>
     <plugin name="cordova-plugin-globalization" spec="~1.0.5"/>
     <plugin name="cordova-plugin-camera" spec="~2.3.1"  />
